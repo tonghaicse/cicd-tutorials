@@ -27,6 +27,8 @@ jobs:
       run: |
           docker --version
           docker images
+    - name: check key
+      run: echo ${{ secrets.AWS_ACCESS_KEY }}
     - name: performe some cli command
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
