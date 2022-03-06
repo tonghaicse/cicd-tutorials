@@ -21,9 +21,7 @@ jobs:
       run: |
           pwd
           ls -a
-    - name: install dependencies
-      run: |
-          python -m pip install --upgrade pip
-          pip install awscli
-    - name: list out buckets in s3
-      run: aws s3 ls
+    - name: check version of aws cli
+      run: aws --version
+    - name: check versin of docker
+      run: docker --version
