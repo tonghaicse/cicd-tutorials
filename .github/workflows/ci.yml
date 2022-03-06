@@ -18,4 +18,6 @@ jobs:
     - name: check version of python
       run: python --version
     - name: check current directory
-      run: pwd
+      run: |
+          pwd
+          ls -a
