@@ -6,6 +6,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
     
     steps:
     - uses: actions/checkout@v1
@@ -26,7 +30,7 @@ jobs:
     - name: check versin of docker
       run: docker --version
     - name: Configure AWS credentials from Test account
-      uses: aws-actions/configure-aws-credentials@b8c74de
+      uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-region: us-east-1
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
