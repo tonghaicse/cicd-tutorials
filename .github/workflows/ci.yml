@@ -3,33 +3,20 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: write
+      contents: read
     
     steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-    - name: check version of python
-      run: python --version
-    - name: check current directory
-      run: |
-          pwd
-          ls -a
-    - name: check version of aws cli
-      run: aws --version
-    - name: check versin of docker
-      run: docker --version
-    - name: Configure AWS credentials from Test account
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
