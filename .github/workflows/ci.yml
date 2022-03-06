@@ -27,11 +27,13 @@ jobs:
       run: |
           docker --version
           docker images
+    - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2 # replace this with your aws-region
     - name: check key
       run: echo ${{ secrets.AWS_ACCESS_KEY_ID }}
     - name: performe some cli command
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: 'ap-south-1'
       run: aws s3 ls
