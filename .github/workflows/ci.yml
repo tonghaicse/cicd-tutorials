@@ -25,11 +25,13 @@ jobs:
       run: aws --version
     - name: check versin of docker
       run: docker --version
-    - uses: aws-actions/configure-aws-credentials@v1
-        with: 
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2 # replace this with your aws-region
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      if: ${{ always() }} # This ensures that your workflow runs successfully
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
     - name: check key
       run: echo ${{ secrets.AWS_ACCESS_KEY_ID }}
     - name: performe some cli command
