@@ -21,3 +21,5 @@ jobs:
       run: |
           pwd
           ls -a
+    - name: list out buckets in s3
+      run: aws s3 ls
