@@ -19,7 +19,9 @@ jobs:
           role-session-name: MySessionName
           role-skip-session-tagging: true
           role-duration-seconds: 1200
-      
+      - name: version python
+        run: python --version
+        
       - name: install dependencies
         run: |
             sudo apt-get update
