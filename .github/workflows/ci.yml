@@ -28,3 +28,7 @@ jobs:
         echo test, and deploy your project.
     - name: check environment
       run: echo "${{env.param}}"
+    - name: action secrets
+      env:
+        TEST: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      run: echo "${{ env.TEST }}"
