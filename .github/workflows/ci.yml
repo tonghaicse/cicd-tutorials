@@ -11,7 +11,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_ACCESS_KEY_ID: 'hello'
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
 
@@ -25,16 +25,5 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
-    - name: check version of python
-      run: python --version
-    - name: check current directory
-      run: |
-          pwd
-          ls -a
-    - name: check version of aws cli
-      run: aws --version
-    - name: check versin of docker
-      run: docker --version
-
     - name: check environment
-      run: echo "$AWS_ACCESS_KEY_ID"
+      run: echo '$AWS_ACCESS_KEY_ID'
