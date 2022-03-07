@@ -1,6 +1,8 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 jobs:
   deploy:
@@ -10,7 +12,9 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    
+    env:
+      param: hello
+      param1: hello1
 
     steps:
     - name: Checkout
@@ -23,4 +27,4 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
     - name: check environment
-      run: echo "${{env.AWS_SECRET_ACCESS_KEY}}"
+      run: echo "${{env.param}}"
