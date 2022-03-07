@@ -25,5 +25,6 @@ jobs:
             aws --version
             python --version
             docker --version
+            pwd
 
     
