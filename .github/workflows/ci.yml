@@ -23,10 +23,12 @@ jobs:
       - name: install dependencies
         run: |
             pip install boto3
-      - name: build and push images to ECR
-        run: |
-          cd container
-          sh build_and_push.sh
+            pip install sagemaker
+            pip install numpy
+      #- name: build and push images to ECR
+      #  run: |
+      #    cd container
+      #    sh build_and_push.sh
       - name: download pytorch model
         run: |
           curl "https://zenodo.org/record/3987831/files/Cnn14_DecisionLevelMax_mAP%3D0.385.pth?download=1" -o cnn14max.pth
