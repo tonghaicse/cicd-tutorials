@@ -35,7 +35,10 @@ jobs:
           curl "https://zenodo.org/record/3987831/files/Cnn14_DecisionLevelMax_mAP%3D0.385.pth?download=1" -o cnn14max.pth
           tar -cvzf cnn14max.tar.gz cnn14max.pth
           mv cnn14max.pth code/
-          ls -a
-          ls code/
+      - name: run test cases
+        run: |
+          cd code/
+          python test_inference.py
+
 
     
