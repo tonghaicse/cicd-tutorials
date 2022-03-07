@@ -5,30 +5,23 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  build-deploy:
 
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write
-      contents: read
-    env:
-      param: hello
-      param1: hello1
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::686785355746:role/admin
+          role-session-name: MySessionName
+          role-skip-session-tagging: true
+          role-duration-seconds: 1200
       
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-    - name: check environment
-      run: echo "${{env.param}}"
-    - name: action secrets
-      env:
-        TEST: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      run: echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g' 
+      - name: check aws cli
+        run: aws s3 ls
+        
+    
