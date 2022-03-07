@@ -14,6 +14,7 @@ jobs:
         with:
           python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' 
+      
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -22,6 +23,7 @@ jobs:
           role-session-name: MySessionName
           role-skip-session-tagging: true
           role-duration-seconds: 1200
+      
       - name: version python
         run: python --version
 
@@ -32,22 +34,28 @@ jobs:
             pip install boto3
             pip install sagemaker
             pip install numpy
-            pip install torch===1.5.0
-            pip install torchlibrosa
+            pip install torch==1.10.2
+            pip install torchlibrosa==0.0.9
             pip install container/wheel/pann-0.1.0-py3-none-any.whl
-      #- name: build and push images to ECR
-      #  run: |
-      #    cd container
-      #    sh build_and_push.sh
+      
+      - name: build and push images to ECR
+        run: |
+          cd container
+          sh build_and_push.sh
+      
       - name: download pytorch model
         run: |
           curl "https://zenodo.org/record/3987831/files/Cnn14_DecisionLevelMax_mAP%3D0.385.pth?download=1" -o cnn14max.pth
           tar -cvzf cnn14max.tar.gz cnn14max.pth
           mv cnn14max.pth code/
+      
       - name: run test cases
         run: |
           cd code/
           python test_inference.py
+      
+      - name: deploy the pytorch model to sagemaker
+        run: python sound-event-deployment.py
 
 
     
