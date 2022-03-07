@@ -20,7 +20,10 @@ jobs:
           role-skip-session-tagging: true
           role-duration-seconds: 1200
       
-      - name: check aws cli
-        run: aws s3 ls
+      - name: check version of aws cli, python, docker
+        run: |
+            aws --version
+            python --version
+            docker --version
 
     
