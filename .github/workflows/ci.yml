@@ -11,7 +11,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      AWS_ACCESS_KEY_ID: 'hello'
+      AWS_ACCESS_KEY_ID: hello
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
 
