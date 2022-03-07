@@ -26,5 +26,7 @@ jobs:
             python --version
             docker --version
             ls
+      - name: build and push images to ECR
+        run: sh container/build_and_push.sh
 
     
