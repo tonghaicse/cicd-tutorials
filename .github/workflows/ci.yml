@@ -25,7 +25,7 @@ jobs:
             pip install boto3
             pip install sagemaker
             pip install numpy
-            pip install wheel/pann-0.1.0-py3-none-any.whl
+            pip install container/wheel/pann-0.1.0-py3-none-any.whl
       #- name: build and push images to ECR
       #  run: |
       #    cd container
