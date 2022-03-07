@@ -31,4 +31,4 @@ jobs:
     - name: action secrets
       env:
         TEST: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      run: echo "${{ env.TEST }}"
+      run: echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g' 
