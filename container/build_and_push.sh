@@ -14,7 +14,7 @@ account=$(aws sts get-caller-identity --query Account --output text)
 region=$(aws configure get region)
 region=${region:-us-west-2}
 
-fullname="${account}.dkr.ecr.${region}.amazonaws.com/${image}:v1"
+fullname="${account}.dkr.ecr.${region}.amazonaws.com/${image}:v2"
 
 # If the repository doesn't exist in ECR, create it.
 aws ecr describe-repositories --repository-names "${image}" > /dev/null 2>&1
