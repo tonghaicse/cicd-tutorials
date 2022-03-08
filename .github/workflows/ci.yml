@@ -56,6 +56,3 @@ jobs:
       
       - name: deploy the pytorch model to sagemaker
         run: python sound-event-deployment.py
-
-
-    
